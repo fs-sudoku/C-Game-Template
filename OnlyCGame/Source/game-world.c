@@ -6,7 +6,7 @@
 #include "debug.h"
 #include "input.h"
 
-#define TILE_RECT(x, y) { (uint16)(x), (uint16)(y), (uint16)1, (uint16)1 }
+#define TILE_RECT(x, y) { (x), (y), 1, 1 }
 
 Sprite*			w_single_sprites[WORLD_MAX_SPRITE_COUNT];
 Camera2D*		w_camera;
@@ -18,27 +18,27 @@ uint16		w_collide_tiles_a_density = 15;
 
 Vector2	w_mouse_pos;
 
-static RectInt16 w_ground_tiles[] =
+static Rect w_ground_tiles[] =
 {
 	TILE_RECT(0, 0), TILE_RECT(0, 0), TILE_RECT(1, 0), 
 	TILE_RECT(2, 0), TILE_RECT(3, 0), TILE_RECT(4, 0), 
 	TILE_RECT(5, 0), TILE_RECT(6, 0), TILE_RECT(7, 0),
 };
 
-static RectInt16 w_collide_tiles[] =
+static Rect w_collide_tiles[] =
 {
 	TILE_RECT(4, 2), TILE_RECT(5, 2), TILE_RECT(6, 2)
 };
 
-static uint16 w_ground_tiles_length = sizeof(w_ground_tiles) / sizeof(RectInt16);
-static uint16 w_collide_tiles_length = sizeof(w_collide_tiles) / sizeof(RectInt16);
+static uint16 w_ground_tiles_length = sizeof(w_ground_tiles) / sizeof(Rect);
+static uint16 w_collide_tiles_length = sizeof(w_collide_tiles) / sizeof(Rect);
 
 static void W_CreateCamera()
 {
 	w_camera = Cam_Create();
 }
 
-static RectInt16 W_RandomTile()
+static Rect W_RandomTile()
 {
 	return Atlas_GetRectByXYRect(w_ground_atlas, 
 		UTIL_Random(w_collide_tiles_a_density) ? 
@@ -51,8 +51,6 @@ static void W_Thread_PlaceTiles(int i_offset)
 {
 	SizeInt16 offset;
 	uint8 i_offset_int = *((uint8*)i_offset);
-
-	UTIL_SetSeed(UTIL_ThreadID);
 
 	UTIL_SetVector(offset,
 		i_offset * (WORLD_TILE_SIZE_X / 2),

@@ -116,7 +116,7 @@ Sprite* Sprite_Create(Texture* texture)
 	return result;
 }
 
-Sprite* Sprite_CreateFromAtlas(Atlas* atlas, RectInt16 rect)
+Sprite* Sprite_CreateFromAtlas(Atlas* atlas, Rect rect)
 {
 	Sprite* result = Sprite_Create(atlas->texture);
 	result->rect = rect;
@@ -151,8 +151,8 @@ void Sprite_Draw(Sprite* target)
 		SDL_SetTextureColorMod(target->texture->data, 255, 255, 255);
 	}
 	else {
-	SDL_RenderCopy(main_renderer, target->texture->data, &clip, &rect);
-}
+		SDL_RenderCopy(main_renderer, target->texture->data, &clip, &rect);
+	}
 }
 
 Atlas* Atlas_Create(Texture* texture, uint16 count_x, uint16 count_y)
@@ -167,30 +167,30 @@ Atlas* Atlas_Create(Texture* texture, uint16 count_x, uint16 count_y)
 	UTIL_SetVector(result->elements_size, count_x, count_y);
 	UTIL_SetVector(result->element_per_pixel, texture->size.x / count_x, texture->size.y / count_y);
 
-	result->rect_array = malloc(result->elements_count * sizeof(RectInt16));
+	result->rect_array = malloc(result->elements_count * sizeof(Rect));
 	UTIL_Verify(result->rect_array != 0);
 	
 	return result;
 }
 
-RectInt16 Atlas_GetRectByIndex(Atlas* atlas, uint16 index)
+Rect Atlas_GetRectByIndex(Atlas* atlas, uint16 index)
 {
 	UTIL_Verify(false);
 	// TODO
 }
 
-RectInt16 Atlas_GetRectByXYRect(Atlas* atlas, RectInt16 rect)
+Rect Atlas_GetRectByXYRect(Atlas* atlas, Rect rect)
 {
-	RectInt16 result;
+	Rect result;
 	int16 x_per_p = atlas->element_per_pixel.x, y_per_p = atlas->element_per_pixel.y;
 
 	UTIL_SetRect(result, rect.x * x_per_p, rect.y * y_per_p, x_per_p, y_per_p);
 	return result;
 }
 
-RectInt16 Atlas_GetRectByXY(Atlas* atlas, uint16 index_x, uint16 index_y)
+Rect Atlas_GetRectByXY(Atlas* atlas, uint16 index_x, uint16 index_y)
 {
-	RectInt16 result;
+	Rect result;
 	int16 x_per_p = atlas->element_per_pixel.x, y_per_p = atlas->element_per_pixel.y;
 
 	UTIL_SetRect(result, index_x * x_per_p, index_y * y_per_p, x_per_p, y_per_p);

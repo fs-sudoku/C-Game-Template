@@ -71,7 +71,8 @@ typedef struct
 
 typedef struct
 {
-} RectInt16;
+	int x, y, width, height;
+} Rect;
 
 typedef struct Node
 {
