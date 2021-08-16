@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include <time.h>
 #include <stdio.h>
@@ -7,6 +8,7 @@
 
 #include "debug.h"
 #include "game-world.h"
+#include "game-ui.h"
 
 #define MAIN_SUB_VOID(name) inline static void (name)
 
@@ -24,7 +26,7 @@
 const struct WindowParams {
 	char title[16];
 	uint16 width, height;
-} main_window_param = {"Only C-SDL Game", 1366, 728};
+} main_window_param = {"Only C-SDL Game", SCREEN_WIDTH, SCREEN_HEIGHT};
 
 struct SDL_Window*		main_window;
 struct SDL_Renderer*	main_renderer;
@@ -34,6 +36,8 @@ double					delta_time = 0;
 
 static Uint64			tm_now = 0;
 static Uint64			tm_last = 0;
+
+Vector2					i_mouse_pos;
 
 clock_t					global_ticks;
 
@@ -68,6 +72,7 @@ MAIN_SUB_VOID(M_InitSubsystem())
 
 	UTIL_Verify(SDL_Init(SDL_INIT_EVERYTHING) != true);
 	UTIL_Verify(IMG_Init(IMG_INIT_FLAGS) == IMG_INIT_FLAGS);
+	UTIL_Verify(TTF_Init() != true);
 }
 
 MAIN_SUB_VOID(M_CreateWindow())
@@ -111,11 +116,14 @@ MAIN_SUB_VOID(M_StartLoop())
 			case SDL_KEYDOWN:
 				pressed_keys[window_event.key.keysym.scancode] = true;
 				break;
+			case SDL_MOUSEMOTION:
+				UTIL_SetVector(i_mouse_pos, window_event.motion.x, window_event.motion.y);
+				break;
 			default:
 				break;
 			}
 			/* send event to game-world */
-			W_InputGameWorld(&window_event);
+			W_Input(&window_event);
 		}
 		SDL_RenderClear(main_renderer);
 
@@ -125,7 +133,9 @@ MAIN_SUB_VOID(M_StartLoop())
 
 		delta_time = (double)((tm_now - tm_last) * 1000 / (double)SDL_GetPerformanceFrequency());
 		/* update game-world */
-		W_UpdateGameWorld();
+		W_Update();
+		/* update game-gui */
+		G_Update();
 
 		SDL_RenderPresent(main_renderer);
 	}
@@ -133,12 +143,8 @@ MAIN_SUB_VOID(M_StartLoop())
 
 MAIN_SUB_VOID(M_Exit())
 {
-	D_Printf("Total game life time: %f", info, (double)(clock() - global_ticks) / CLOCKS_PER_SEC);
-
 	SDL_DestroyWindow(main_window);
 	SDL_DestroyRenderer(main_renderer);
-
-	malloc(-1);
 
 	SDL_Quit(), IMG_Quit();
 }
@@ -156,11 +162,11 @@ int main(int argc, char** argv)
 	/* step 3 - create window */
 	M_CreateWindow();
 	/* step 4 - create game world */
-	W_CreateGameWorld();
+	W_Create(), G_Init();
 	/* step 5 - start loop */
 	M_StartLoop();
 	/* step 6 - full clear game world */
-	W_ClearGameWorld(true);
+	W_Clear(true), G_Release();
 	/* step 7 - exit */
 	M_Exit();
 	return MAIN_EXIT_SUCCESS;

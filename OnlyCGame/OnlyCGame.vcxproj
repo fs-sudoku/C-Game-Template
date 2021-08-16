@@ -138,12 +138,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Sudoku\source\repos\OnlyCGame\OnlyCGame\SDL\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\camera.c" />
     <ClCompile Include="Source\debug.c" />
+    <ClCompile Include="Source\game-control.c" />
+    <ClCompile Include="Source\game-ui.c" />
     <ClCompile Include="Source\game-world.c" />
     <ClCompile Include="Source\main.c" />
     <ClCompile Include="Source\render.c" />
@@ -152,6 +154,8 @@
   <ItemGroup>
     <ClInclude Include="Source\camera.h" />
     <ClInclude Include="Source\debug.h" />
+    <ClInclude Include="Source\game-control.h" />
+    <ClInclude Include="Source\game-ui.h" />
     <ClInclude Include="Source\game-world.h" />
     <ClInclude Include="Source\input.h" />
     <ClInclude Include="Source\render.h" />

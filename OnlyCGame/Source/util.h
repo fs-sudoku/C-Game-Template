@@ -56,13 +56,8 @@ typedef struct SDL_Thread* Thread;
 
 typedef struct
 {
-	float x, y;
-} Vector2;
-
-typedef struct
-{
 	int x, y;
-} Vector2Int;
+} Vector2;
 
 typedef struct
 {
@@ -71,7 +66,7 @@ typedef struct
 
 typedef struct
 {
-	uint16 x, y, width, height;
+	int16 x, y, width, height;
 } RectInt16;
 
 typedef struct Node

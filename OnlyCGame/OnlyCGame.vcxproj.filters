@@ -33,6 +33,12 @@
     <ClCompile Include="Source\camera.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Source\game-ui.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\game-control.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\util.h">
@@ -51,6 +57,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Source\input.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\game-ui.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\game-control.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

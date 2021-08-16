@@ -2,9 +2,9 @@
 #include "camera.h"
 #include "render.h"
 
-#define WORLD_MAX_SPRITE_COUNT	(4096)
-#define WORLD_SIZE_X			(16)
-#define WORLD_SIZE_Y			(16)
+#define WORLD_MAX_SPRITE_COUNT	(1024 * 1024)
+#define WORLD_SIZE_X			(64)
+#define WORLD_SIZE_Y			(64)
 #define WORLD_TILE_SIZE_X		(128)
 #define WORLD_TILE_SIZE_Y		(64)
 
@@ -14,11 +14,13 @@ extern Atlas*			w_ground_atlas;
 extern Camera2D*		w_camera;
 extern Texture*			w_ground_texture;
 
-extern void W_CreateGameWorld();
-extern void W_UpdateGameWorld();
-extern void W_InputGameWorld(union SDL_Event*);
+extern Vector2		w_mouse_pos;
 
-extern void W_ClearGameWorld(bool);
+extern void W_Create();
+extern void W_Update();
+extern void W_Input(union SDL_Event*);
+
+extern void W_Clear(bool);
 
 extern void W_RegisterSingleSprite(struct Sprite*);
 extern void W_UnRegisterSingleSprite(struct Sprite*);

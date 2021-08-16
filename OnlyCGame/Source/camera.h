@@ -5,7 +5,8 @@
 
 typedef struct
 {
-	Vector2Int position;
+	Vector2 position;
+	float zoom;
 } Camera2D;
 
 Camera2D* Cam_Create();

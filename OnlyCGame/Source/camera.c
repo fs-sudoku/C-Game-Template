@@ -11,7 +11,7 @@ Camera2D* Cam_Create()
 	UTIL_Verify(result != 0);
 
 	UTIL_SetVector(result->position, 0, 0);
-
+	result->zoom = 1;
 	return result;
 }
 
