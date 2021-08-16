@@ -138,9 +138,9 @@ void Sprite_Draw(Sprite* target)
 	};
 	SDL_Rect clip = { 
 		target->rect.x, target->rect.y,
-		target->rect.width, target->rect.height
+		target->rect.width, target->rect.height 
 	};
-	
+
 	if (target->use_modify_color) {
 		SDL_SetTextureColorMod(target->texture->data,
 			target->modify_color.r,
@@ -151,8 +151,8 @@ void Sprite_Draw(Sprite* target)
 		SDL_SetTextureColorMod(target->texture->data, 255, 255, 255);
 	}
 	else {
-		SDL_RenderCopy(main_renderer, target->texture->data, &clip, &rect);
-	}
+	SDL_RenderCopy(main_renderer, target->texture->data, &clip, &rect);
+}
 }
 
 Atlas* Atlas_Create(Texture* texture, uint16 count_x, uint16 count_y)

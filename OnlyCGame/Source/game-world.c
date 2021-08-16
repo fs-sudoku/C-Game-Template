@@ -50,6 +50,9 @@ static RectInt16 W_RandomTile()
 static void W_Thread_PlaceTiles(int i_offset)
 {
 	SizeInt16 offset;
+	uint8 i_offset_int = *((uint8*)i_offset);
+
+	UTIL_SetSeed(UTIL_ThreadID);
 
 	UTIL_SetVector(offset,
 		i_offset * (WORLD_TILE_SIZE_X / 2),

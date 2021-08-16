@@ -39,6 +39,7 @@ typedef struct
 	Texture*	texture;
 	SizeInt16	elements_size;
 	RectInt16*	rect_array;
+
 	uint16		elements_count;
 	SizeInt16	element_per_pixel;
 } Atlas;

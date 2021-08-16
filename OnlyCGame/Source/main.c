@@ -116,9 +116,6 @@ MAIN_SUB_VOID(M_StartLoop())
 			case SDL_KEYDOWN:
 				pressed_keys[window_event.key.keysym.scancode] = true;
 				break;
-			case SDL_MOUSEMOTION:
-				UTIL_SetVector(i_mouse_pos, window_event.motion.x, window_event.motion.y);
-				break;
 			default:
 				break;
 			}

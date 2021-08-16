@@ -61,12 +61,16 @@ typedef struct
 
 typedef struct
 {
+	int x, y;
+} Vector2Int;
+
+typedef struct
+{
 	uint16 x, y;
 } SizeInt16;
 
 typedef struct
 {
-	int16 x, y, width, height;
 } RectInt16;
 
 typedef struct Node
